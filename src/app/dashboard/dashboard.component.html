@@ -1,0 +1,551 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+          <button (click)="nvoTicket()" class="btn btn-primary">
+              Generar Ticket
+          </button>
+          <button (click)="refresh()" class="btn btn-secondary">
+              Refresh
+          </button>
+        </div>
+        <!-- <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Used Space</p>
+                        <h3 class="card-title">49/50
+                            <small>GB</small>
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">warning</i>
+                            <a href="javascript:void(0)">Get More Space...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <p class="card-category">Revenue</p>
+                        <h3 class="card-title">$34,245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Last 24 Hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Fixed Issues</p>
+                        <h3 class="card-title">75</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> Tracked from Github
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Followers</p>
+                        <h3 class="card-title">+245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Daily Sales</h4>
+                        <p class="card-category">
+                            <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-warning">
+                        <div class="ct-chart" id="websiteViewsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Email Subscriptions</h4>
+                        <p class="card-category">Last Campaign Performance</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <div class="ct-chart" id="completedTasksChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Completed Tasks</h4>
+                        <p class="card-category">Last Campaign Performance</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Tickets:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#nuevas" data-toggle="tab">
+                                            <i class="material-icons">add_task</i> Nuevas
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#completas" data-toggle="tab">
+                                            <i class="material-icons">done</i> Completadas
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#porvencer" data-toggle="tab">
+                                            <i class="material-icons">pending_actions</i> Por Vencer
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#vencidas" data-toggle="tab">
+                                          <i class="material-icons">update</i> Vencidos
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#vencidasundia" data-toggle="tab">
+                                          <i class="material-icons">watch_later</i> Vencidos por 1 Dia
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#vencidasdosdias" data-toggle="tab">
+                                          <i class="material-icons">watch_later</i> Vencidos por 2 Dias
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="nuevas">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let tickets of listaTickets">
+                                          <tr [style.background-color]="tickets.Color">
+                                              <td style="text-align: center;">
+                                                  <div class="form-check">
+                                                      <label class="form-check-label">
+                                                          <input class="form-check-input" type="checkbox" value="" (change)="completar(tickets.ID)">
+                                                          <span class="form-check-sign">
+                                                              <span class="check"></span>
+                                                          </span>
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                              <td>{{tickets.Descripcion}}</td>
+                                              <td>{{tickets.Responsable}}</td>
+                                              <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                              <td>{{tickets.Hora_Abierto}}</td>
+  
+                                              <!-- <td class="text-right td-actions">
+                                                  <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                      <i class="material-icons">edit</i>
+                                                  </button>
+                                                  <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                      <i class="material-icons">close</i>
+                                                  </button>
+                                              </td> -->
+                                          </tr>
+                                        </ng-container>
+                                        
+  
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="completas">
+                                <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                  <ng-container *ngFor="let tickets of listaTicketsCompletas">
+                                      <tr [style.background-color]="tickets.Color">
+                                          <td style="text-align: center;">
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" (change)="completar()">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>{{tickets.Descripcion}}</td>
+                                          <td>{{tickets.Responsable}}</td>
+                                          <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                          <td>{{tickets.Hora_Abierto}}</td>
+  
+                                          <!-- <td class="text-right td-actions">
+                                              <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td> -->
+                                      </tr>
+                                    </ng-container>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="porvencer">
+                                <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                  <ng-container *ngFor="let tickets of listaTicketsXVencer">
+                                      <tr [style.background-color]="tickets.Color">
+                                          <td style="text-align: center;">
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" (change)="completar()">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>{{tickets.Descripcion}}</td>
+                                          <td>{{tickets.Responsable}}</td>
+                                          <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                          <td>{{tickets.Hora_Abierto}}</td>
+  
+                                          <!-- <td class="text-right td-actions">
+                                              <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td> -->
+                                      </tr>
+                                    </ng-container>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="vencidas">
+                              <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                  <ng-container *ngFor="let tickets of listaTicketsVencidas">
+                                      <tr [style.background-color]="tickets.Color">
+                                          <td style="text-align: center;">
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" (change)="completar()">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>{{tickets.Descripcion}}</td>
+                                          <td>{{tickets.Responsable}}</td>
+                                          <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                          <td>{{tickets.Hora_Abierto}}</td>
+  
+                                          <!-- <td class="text-right td-actions">
+                                              <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td> -->
+                                      </tr>
+                                    </ng-container>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="vencidasundia">
+                              <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                  <ng-container *ngFor="let tickets of listaTicketsVencidasUnDia">
+                                      <tr [style.background-color]="tickets.Color">
+                                          <td style="text-align: center;">
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" (change)="completar()">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>{{tickets.Descripcion}}</td>
+                                          <td>{{tickets.Responsable}}</td>
+                                          <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                          <td>{{tickets.Hora_Abierto}}</td>
+  
+                                          <!-- <td class="text-right td-actions">
+                                              <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td> -->
+                                      </tr>
+                                    </ng-container>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="vencidasdosdias">
+                              <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <td>
+                                              Completar
+                                          </td>
+                                          <td>
+                                              Descripcion
+                                          </td>
+                                          <td>
+                                              Responsable
+                                          </td>
+                                          <td>
+                                              Fecha de Inicio
+                                          </td>
+                                          <td>
+                                              Hora Abierto
+                                          </td>
+                                      </tr>
+                                  </thead>
+                                  <ng-container *ngFor="let tickets of listaTicketsVencidasDosDias">
+                                      <tr [style.background-color]="tickets.Color">
+                                          <td style="text-align: center;">
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" (change)="completar()">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>{{tickets.Descripcion}}</td>
+                                          <td>{{tickets.Responsable}}</td>
+                                          <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
+                                          <td>{{tickets.Hora_Abierto}}</td>
+  
+                                          <!-- <td class="text-right td-actions">
+                                              <button  mat-raised-button type="button" matTooltip="Editar Tarea" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Eliminar Tarea" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td> -->
+                                      </tr>
+                                    </ng-container>
+                              </table>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+  <div class="row">
+      <div class="col-lg-6 col-md-12">
+          <div class="card">
+              <div class="card-header card-header-warning">
+                  <h4 class="card-title">Rendimiento de Usuarios</h4>
+                  <p class="card-category"></p>
+              </div>
+              <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                      <thead class="text-warning">
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Tickets Completadas</th>
+                          <th>Tickets Pendientes</th>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td style="text-align: center;">1</td>
+                              <td>Arturo Martinez Farias</td>
+                              <td style="text-align: center;">7</td>
+                              <td style="text-align: center;">1</td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: center;">2</td>
+                              <td>Rodrigo Ignacio Lopez Guzman</td>
+                              <td style="text-align: center;">6</td>
+                              <td style="text-align: center;">3</td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: center;">3</td>
+                              <td>Hector Cesar Orozco</td>
+                              <td style="text-align: center;">9</td>
+                              <td style="text-align: center;">0</td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: center;">4</td>
+                              <td>Rosa Isela Suarez Peña</td>
+                              <td style="text-align: center;">5</td>
+                              <td style="text-align: center;">9</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+            
+    </div>
+  </div>
+  
+  
+  <ng-template #error let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Se ah producido un Error contacte a assesor</h4>
+      </div>
+      <!-- <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div> -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click');">Cerrar</button>
+      </div>
+    </ng-template>
