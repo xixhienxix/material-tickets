@@ -20,17 +20,24 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper/'
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthService } from 'services/auth.service';
+import 'rxjs/operator/shareReplay'
+import { AuthComponent } from './components/auth/auth.component';
+import { BrowserModule } from '@angular/platform-browser';
+
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    BrowserModule, 
     ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
@@ -39,6 +46,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     MatFormFieldModule,
     MatSelectModule,
     MatStepperModule,
+    MatCardModule,
     TextFieldModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
@@ -46,10 +54,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   declarations: [
     AppComponent,
+    AuthComponent,
     AdminLayoutComponent,
 
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

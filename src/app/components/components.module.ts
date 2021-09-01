@@ -11,6 +11,10 @@ import {MatStepperModule} from '@angular/material/stepper/'
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { NuevosTicketsComponent } from './nuevos-tickets/nuevos-tickets.component';
 import { CompletarTicketComponent } from './completar-ticket/completar-ticket/completar-ticket.component';
+import { LoginComponent } from './login/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './signup/signup/signup.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,13 +23,17 @@ import { CompletarTicketComponent } from './completar-ticket/completar-ticket/co
     MatSelectModule,
     MatStepperModule,
     TextFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
     NuevosTicketsComponent,
-    CompletarTicketComponent
+    CompletarTicketComponent,
+    LoginComponent,
+    SignupComponent
   ],
   exports: [
     FooterComponent,

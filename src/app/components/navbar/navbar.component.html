@@ -1,13 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-            <button class="btn" type="button" style="background-color:#21D864; font-weight: bold;">Activos</button>
-            <button class="btn" type="button" style="background-color:#F2C811; font-weight: bold;">Por Vencer</button>
-            <button class="btn" type="button" style="background-color:#E83728; font-weight: bold;">Vencidos</button>
-            <button class="btn" type="button" style="background-color:#EC86AE; font-weight: bold;">Vencidos por 1 dia</button>
-            <button class="btn" type="button" style="background-color:#FFC0D9; font-weight: bold;">Vencidos por 2 o mas Dias</button>
-
+            <button disabled class="btn" type="button" style="font-weight: bold; background-color:#21D864; width: 150px; ">Activos</button>
+            <button disabled class="btn" type="button" style="font-weight: bold; background-color:#F2C811; width: 150px;">Por Vencer</button>
+            <button disabled class="btn" type="button" style="font-weight: bold; background-color:#E83728; width: 150px;">Vencidos</button>
+            <!-- <button disabled class="btn" type="button" style="background-color:#EC86AE; width: 200px;">Vencidos por 1 dia</button>
+            <button disabled class="btn" type="button" style="background-color:#FFC0D9; width: 200px;">Vencidos por 2 o mas Dias</button> -->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <!--*ngIf="isLoggedOut$ | async" -->       
+          <!-- <button disabled class="btn " type="button btn-primary" style="background-color:#21a4d8;" (click)="singIn()">Registrate </button> -->
+           <!--*ngIf= *ngIf="isLoggedOut$ | async"-->      
+           <!-- <button class="btn" type="button btn-primary" style="background-color:#21a4d8;" (click)="login()">Iniciar Sesion </button> -->
+        <!--*ngIf="isLoggedIn$ | async"-->    
+        <!-- <button  class="btn" type="button btn-primary" style="background-color:#f1287c;" (click)="logOut()">Cierra Sesion </button>             -->
         </div>
+
+      
         <!-- <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>

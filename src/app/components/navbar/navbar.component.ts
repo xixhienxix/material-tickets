@@ -2,7 +2,13 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login/login.component';
+import { AuthService } from 'services/auth.service';
+import { Observable } from 'rxjs';
+import { Usuario } from 'app/models/usuario';
+import { SignupComponent } from '../signup/signup/signup.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,16 +17,32 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-      mobile_menu_visible: any = 0;
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    user$:Observable<Usuario>;
+
+    isLoggedIn$:Observable<boolean>;
+    isLoggedOut$:Observable<boolean>;
+
+    constructor(
+        private authService : AuthService,
+        location: Location,  
+        private element: ElementRef, 
+        private router: Router,
+        private modalService: NgbModal,
+        ) {
       this.location = location;
           this.sidebarVisible = false;
+          
     }
 
     ngOnInit(){
+      this.user$=this.authService.user$;
+      this.isLoggedIn$=this.authService.isLoggedIn$;
+      this.isLoggedOut$=this.authService.isLoggedOut$;
+      
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -32,6 +54,27 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+    }
+
+    singIn(){
+
+    this.modalService.open(SignupComponent, { size: 'sm' });
+
+    }
+
+
+    
+    login(){
+
+       const modalRef = this.modalService.open(LoginComponent, { size: 'sm' });
+        modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+            console.log(receivedEntry);
+            })
+        }
+
+    logOut(){
+
+        this.authService.isLoggedOut(0).subscribe()
     }
 
     sidebarOpen() {

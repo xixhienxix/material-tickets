@@ -3,6 +3,7 @@
 export interface Tickets
 {
   ID:number;
+  Area:string;
   Descripcion:string;
   Responsable:string;
   Supervisado:string;

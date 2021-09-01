@@ -10,6 +10,7 @@ import { TicketService } from '../../services/tickets.service';
 import { CampanasService } from '../../services/campanas.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { DashboardComponent } from 'app/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-nuevo-ticket',
@@ -27,6 +28,7 @@ export class NuevoTicketComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    private dashboardService:DashboardComponent,
     public modal: NgbActiveModal,
     private http: HttpClient,
     public ticketService:TicketService,
@@ -75,6 +77,7 @@ export class NuevoTicketComponent implements OnInit {
 
     let tickets: Tickets = {
       ID:1,
+      Area:campana,
       Descripcion:campana,
       Responsable:responsable,
       Supervisado:'',
@@ -99,7 +102,7 @@ export class NuevoTicketComponent implements OnInit {
           console.log(response)
         })
         this.openMini(this.exito)
-        this.ticketService.getTickets();
+        this.dashboardService.refresh();
       })
   }
 

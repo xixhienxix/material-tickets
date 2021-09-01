@@ -8,13 +8,13 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <h4>Selecciona Campaña</h4>
+                            <h4>Selecciona Area: </h4>
                             <mat-form-field appearance="fill">
-                            <mat-label>Selecciona Campaña</mat-label>
+                            <mat-label>Selecciona Area</mat-label>
                             <mat-select #selected>
-                                <ng-container *ngFor="let campanas of listaCampanas">
-                                    <mat-option value="{{campanas.descripcion}}">{{campanas.descripcion}}</mat-option>
-                                </ng-container>
+                              <ng-container *ngFor="let area of listaAreas">
+                                <mat-option value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
+                            </ng-container>  
                             </mat-select>
                             </mat-form-field>
 
@@ -22,16 +22,16 @@
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Responsable</mat-label>
                             <mat-select #responsable>
-                                <mat-option value="npmArturo">Arturo</mat-option>
-                                <mat-option value="Rodrigo">Rodrigo</mat-option>
-                                <mat-option value="Charly">Charly</mat-option>
-                                <mat-option value="Octavio">Octavio</mat-option>
+                              <ng-container *ngFor="let usuario of listaUsuarios">
+                                <mat-option value="{{usuario.Nombre}}">{{usuario.Nombre}}</mat-option>
+                            </ng-container>  
                             </mat-select>
                             </mat-form-field>
 
-                 
-                
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="guardaTicket(selected.value,responsable.value);close()">Guardar Ticket</button>
+                            <h4>Descripcion</h4>
+                            <input #descripcion class="form-control">
+                <br>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="guardaTicket(selected.value,responsable.value,descripcion.value);close()">Guardar Ticket</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -53,7 +53,7 @@
       <p>One fine body&hellip;</p>
     </div> -->
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click');getTickets()">Cerrar</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click');">Cerrar</button>
     </div>
   </ng-template>
   

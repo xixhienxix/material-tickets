@@ -1,0 +1,104 @@
+<!-- <form>
+    <fieldset>
+        <legend>
+            Sign Up
+        </legend>
+
+        <div class="form-field">
+            <label> Email:</label>
+            <input name="email" formControlName="email">
+        </div>
+        <div class="form-field">
+            <label>Password</label>
+            <input name="confirm" formControlName="password" type="password">
+        </div>
+        <div class="form-field">
+            <label>Confirm:</label>
+            <input name="confirm" formControlName="confirm" type="password">
+        </div>
+    </fieldset>
+
+    <div class="form-buttons">
+        <button class="button button-primary" (click)="singUp()">sign Up</button>
+    </div>
+</form> -->
+<!--begin::Signin-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Registrar Usuario</h4>
+                        <p class="card-category">Completa tu Registro</p>
+                    </div>
+                    <div class="card-body">
+                            <!-- <form autocomplete="off"  >
+                                <fieldset>
+                                    <div class="modal-container">
+                                        <div class="row">
+                                            <div class="form-field">
+                                                <label> Email: &nbsp;</label>
+                                                <input #email>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-field">
+                                                <label>Area: &nbsp;</label>
+                                                <mat-form-field appearance="fill">
+                                                    <mat-select  #area *ngFor="let area of areaList">
+                                                        <mat-option  value={{area.ID}}>{{area.Descripcion}}</mat-option>
+                                                    </mat-select>
+                                                    </mat-form-field>                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-field">
+                                                <label>Password: &nbsp;</label>
+                                                <input name="confirm" #password type="password">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-field">
+                                                <label>Confirm: &nbsp;</label>
+                                                <input name="confirm"  type="password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="singUp(email.value,password.value)">Confirmar</button>
+                                    <div class="clearfix"></div>
+                                </fieldset>
+                                
+                            </form> -->
+                        <div class="row">
+                            <h4 class="col-sm-12">Area:</h4>
+                            <mat-form-field appearance="fill">
+                            <mat-label>Selecciona Responsable</mat-label>
+                            <mat-select #area >
+                                <ng-container *ngFor="let area of areaList">
+                                    <mat-option value="{{area.ID}}">{{area.Descripcion}}</mat-option>
+                                </ng-container>                                
+                            </mat-select>
+                            </mat-form-field>  
+                        </div>
+                        <div class="row">
+                            <h4 class="col-sm-12">Email: </h4>
+                            <input class="form-control" #email>
+                        </div>
+                        <div class="row">
+                            <h4 class="col-sm-12">Contraseña: </h4>
+                            <input type="password" class="form-control" #password>
+                        </div>
+                        <div class="row">
+                            <h4 class="col-sm-12">Confirmar Contraseña: </h4>
+                            <input type="password" class="form-control" #confirmar>
+                        </div>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="signUp(area.value,password.value,email.value);">Registrar</button>
+
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+    </div>
+  </div>
+  

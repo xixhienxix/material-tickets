@@ -8,6 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { NuevosTicketsComponent } from 'app/components/nuevos-tickets/nuevos-tickets.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -53,8 +54,10 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard',      component: DashboardComponent },
+    { path: 'tickets',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
+    { path: 'nuevo-ticket',        component: NuevosTicketsComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },

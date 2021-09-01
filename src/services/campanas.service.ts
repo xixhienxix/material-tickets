@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Campanas } from '../app/models/campana'
 import { Observable, of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
-import {environment} from "../environments/environment"
+import {environment} from "../environments/environment.prod"
 import { catchError, map, tap } from 'rxjs/operators';
 
 
@@ -15,7 +15,7 @@ export class CampanasService  {
 
     getCampanas():Observable<Campanas[]>
     {
-        return this.http.get<Campanas[]>("http://localhost:8081/api"+"/campanas")
+        return this.http.get<Campanas[]>(environment.apiUrl+"/campanas")
     }
   
 

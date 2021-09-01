@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from "@angular/common/http";
 import { TicketService } from '../../../../services/tickets.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'completar-ticket',
@@ -10,8 +12,11 @@ import { TicketService } from '../../../../services/tickets.service';
 })
 export class CompletarTicketComponent implements OnInit {
   id: number;
-  
+  uploadedFiles: Array < File > ;
+  closeResult: string;
+
   constructor(
+    private modalService: NgbModal,
     public modal: NgbActiveModal,
     private http: HttpClient,
     public ticketService:TicketService,
@@ -19,12 +24,58 @@ export class CompletarTicketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.id)
   }
+  fileChange(element) {
+    this.uploadedFiles = element.target.files;
+  }
+  upload() {
+    let formData = new FormData();
+    for (var i = 0; i < this.uploadedFiles.length; i++) {
+        formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
+    }
+    this.http.post('/api/upload', formData)
+    .subscribe((response) => {
+         console.log('response received is ', response);
+    })
+}
   close(){
     this.modal.close();
   }
   completarTicket(id:number)
   {
-    this.ticketService.completTicket(id)
+    this.ticketService.completarTicket(id).subscribe(
+      ()=>{
+        console.log("Ticket Completado con exito")
+        this.ticketService.getTickets();
+      },
+      (err)=>{
+        if(err){
+          console.log("Error al completar Ticket: "+err.message)
+        }
+      },
+      ()=>{
+        console.log("Finaliza el updatye")
+      },
+    )
+  }
+
+  openMini(exito) {
+  
+    this.modalService.open(exito,{ size: 'sm' }).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+    } else {
+        return  `with: ${reason}`;
+    }
   }
 }
