@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NuevoTicketComponent } from '../nuevo-ticket/nuevo-ticket.component';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment.prod"
 import { Tickets } from 'app/models/tickets';
@@ -13,8 +12,8 @@ import * as Chartist from 'chartist';
 import { BrowserStack } from 'protractor/built/driverProviders';
 import { Usuario } from 'app/models/usuario';
 import { UsuarioService } from 'services/usuario.service';
-import { AuthService } from 'services/auth.service';
 import { LoginComponent } from 'app/components/login/login/login.component';
+import { AuthentificationService } from 'app/authentification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -63,7 +62,8 @@ export class DashboardComponent implements OnInit {
     Area:'',
     Rol:'',
     Password:'',
-    conectado:0
+    conectado:0,
+    plantel:'On-Line'
   }
 
   constructor(
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
     private http: HttpClient,
     public ticketService:TicketService,
     public usuarioService:UsuarioService,
-    public authService:AuthService
+    public authService:AuthentificationService
   ) { 
       }
 
@@ -285,45 +285,26 @@ export class DashboardComponent implements OnInit {
          })
      }
 
- logOut(id:number){
+//  logOut(id:number){
 
-     this.authService.isLoggedOut(id).subscribe(
-      (res) => 
-      {
-        this.mensaje="Sesion Cerrada con exito"
-        const modalRef = this.modalService.open(this.exito,{size:'sm'});
-        this.usuarioEnLinea.conectado=0;
-      },
-      (err) =>{
-        this.mensaje="Hubo un problema al cerrar Sesion"
-        const modalRef = this.modalService.open(this.exito,{size:'sm'});
-        console.log('Error al Cerrar Sesion :', err.message)
-      },
-      ()=>{
-      })
-    }
+//      this.authService.isLoggedOut(id).subscribe(
+//       (res) => 
+//       {
+//         this.mensaje="Sesion Cerrada con exito"
+//         const modalRef = this.modalService.open(this.exito,{size:'sm'});
+//         this.usuarioEnLinea.conectado=0;
+//       },
+//       (err) =>{
+//         this.mensaje="Hubo un problema al cerrar Sesion"
+//         const modalRef = this.modalService.open(this.exito,{size:'sm'});
+//         console.log('Error al Cerrar Sesion :', err.message)
+//       },
+//       ()=>{
+//       })
+//     }
 
 
-  completar(id:number,nombre:string)
-  {
-console.log(nombre)
-    if(this.usuarioEnLinea.conectado==1&&this.usuarioEnLinea.Nombre==nombre||this.usuarioEnLinea.Rol=='Administrador'){
-      const modalRef = this.modalService.open(CompletarTicketComponent);
-    modalRef.componentInstance.id = id;
-    modalRef.componentInstance.nombre = nombre;
 
-    }else if (this.usuarioEnLinea.Nombre!=nombre)
-    {
-      this.error ='Este Ticket no esta asignado a este usuario'
-      this.modalService.open(this.error,{size:'sm'})
-    }
-    else if(this.usuarioEnLinea.conectado==0){
-      this.error ='Ingrese Sesion para concluir Tickets'
-      this.modalService.open(this.error,{size:'sm'})
-    }
-    
-
-  }
 
   refresh()
   {

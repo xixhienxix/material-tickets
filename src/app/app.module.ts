@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -27,10 +27,13 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthService } from 'services/auth.service';
 import 'rxjs/operator/shareReplay'
-import { AuthComponent } from './components/auth/auth.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthRegisterComponent } from './components/auth/auth.register.component';
+import { AuthGuard } from './components/auth/_guards/auth.guard';
+import { AlertService } from 'services/alert.service';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 
 @NgModule({
@@ -54,11 +57,13 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   declarations: [
     AppComponent,
-    AuthComponent,
     AdminLayoutComponent,
 
   ],
-  providers: [AuthService],
+  providers: [AuthGuard,AlertService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

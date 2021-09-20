@@ -1,46 +1,50 @@
+<alert></alert>
+
 <div  class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div style="position: absolute; "  class="col-sm-4">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title">Ingrese Usuario y Contraseña</h4>
-                  </div>
-                  <div class="card-body">
-                        
-                     <form #ngForm (ngSubmit)="onSubmit(ngForm)">
-                      <div class="row">
-                        <h4 class="col-sm-12">Area: </h4>
-                        <mat-form-field appearance="fill">
-                          <mat-label>Selecciona Area</mat-label>
-                          <mat-select #selected>
-                            <ng-container *ngFor="let area of listaAreas">
-                              <mat-option value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
-                          </ng-container>  
-                          </mat-select>
-                          </mat-form-field>                    
-                        </div>
-                      <div class="row">
-                        <h4 class="col-sm-12">Usuario (Email): </h4>
-                        <input ngModel name="email" type="email" minlength="5" required autocomplete="off" class="form-control" #email>
+    <div class="row">
+      <div   class="col-sm-4">
+          <div class="card">
+              <div class="card-header card-header-danger">
+                  <h4 class="card-title">Ingrese Usuario y Contraseña</h4>
+              </div>
+              <div class="card-body">
+                    
+                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+                 
+                  <div class="row">
+                    <h4 class="col-sm-12">Email: </h4>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Username is required</div>
                     </div>
-                    <div class="row">
-                        <h4 class="col-sm-12">Contraseña: </h4>
-                        <input type="password" class="form-control" #password>
-                    </div>
-                    <br>
-                     <!--(click)="signIn(password.value,email.value);"-->
-                      <button mat-raised-button type="submit" class="btn btn-danger pull-right" >Sign Up</button>
-                    </form>
-
+                </div>
+                <br>
+                <div class="row">
+                    <h4 class="col-sm-12">Contraseña: </h4>
+                    <input ngModel name="password" type="password" class="form-control" #password
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">La Contraseña es Obligatoria</div>
                   </div>
+                </div>
+                <br>
+                 <div class="row">
+                  <button [disabled]="loading" mat-raised-button class="btn btn-danger pull-right" >Iniciar Sesion</button>
+                  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                 </div>
+                 <a [routerLink]="['/register']" class="btn btn-link">Registro</a>
+                </form>
+           
               </div>
           </div>
-
       </div>
+
+  </div>
+  
   </div>
 </div>
-
+<!-- 
 <ng-template #espere let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Iniciando Sesion</h4>
@@ -79,4 +83,4 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click');getTickets()">Cerrar</button>
   </div>
-</ng-template>
+</ng-template> -->

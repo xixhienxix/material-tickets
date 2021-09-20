@@ -8,189 +8,35 @@
                     </div>
                     <div class="card-body">
                         <form>
+                            <ng-container *ngFor="let preguntas of preguntasArray">
+                                <div class="row">    
+                                    <div class="col-lg-6"><h4>{{preguntas.pregunta}}</h4></div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" >
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            SI
+                                            <input class="form-check-input" type="checkbox" value="" >
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            NO
+                                            <input class="form-check-input" type="checkbox" value="" >
+                                            <span class="form-check-sign">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </ng-container>
 
-                            <div class="row">
-                                <h4>Marque las casillas que correspondan de acuerdo al caso del ticket</h4>
-
-                                <div class="col-lg-6"><h4>Se contactó al alumno?</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>Se dio la bienvenida ?</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>Requiere Seguimeinto el ticket ?</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>Se direcciona al plantel ?</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <br>
-                            <h4>Entrega de Docuemntos (en caso de requerirlo marque los necesarios)</h4>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>Acta de nacimiento</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>CURP</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6"><h4>Comprobante de Domicilio</h4></div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" >
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        SI
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        NO
-                                        <input class="form-check-input" type="checkbox" value="" >
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="col-lg-6"><h4>Descripcion</h4></div>
+                            <div class="col-lg-6"><h4>Notas</h4></div>
                             <input #descripcion class="form-control">
                             <!-- <h4>Subir Archivo</h4>
                             <br>
@@ -203,7 +49,7 @@
                             </div> -->
                             <br>
 
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="completarTicket(id);close()">Completar Ticket</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="completarTicket(ticket.ID,descripcion.value);close()">Completar Ticket</button>
                             <div class="clearfix"></div>
 
                         </form>

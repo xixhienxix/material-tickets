@@ -14,7 +14,11 @@ import { CompletarTicketComponent } from './completar-ticket/completar-ticket/co
 import { LoginComponent } from './login/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup/signup.component';
-
+import { LoginComponentJwt } from './auth/login/login.component';import { AuthComponent } from './auth/auth.component';
+import { AuthRegisterComponent } from './auth/auth.register.component';
+import { AlertComponent } from 'app/_directives/alert.component';
+import { TicketsTableComponent } from './tickets-table/tickets-table.component';
+ ''
 @NgModule({
   imports: [
     CommonModule,
@@ -28,17 +32,23 @@ import { SignupComponent } from './signup/signup/signup.component';
   ],
   declarations: [
     FooterComponent,
+    AlertComponent,
     NavbarComponent,
     SidebarComponent,
     NuevosTicketsComponent,
     CompletarTicketComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LoginComponentJwt,
+    AuthComponent,
+    AuthRegisterComponent,
+    TicketsTableComponent
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent
   ]
+
 })
 export class ComponentsModule { }

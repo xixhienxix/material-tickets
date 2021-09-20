@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'services/auth.service';
 import { AreasService } from 'services/areas.service';
 import { Areas } from 'app/models/areas';
 import { CampanasService } from 'services/campanas.service';
 import { Campanas } from 'app/models/campana';
+import { AuthentificationService } from 'app/authentification.service';
 
 @Component({
   selector: 'signup',
@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   constructor(
     public areaService : AreasService,
     public campanaService:CampanasService,
-    public authService:AuthService,
+    public authService:AuthentificationService,
     private fb:FormBuilder,
     ) { 
     // this.loginForm=this.fb.group({
@@ -80,11 +80,11 @@ export class SignupComponent implements OnInit {
 
     // if(val.email && val.password ===val.confirm){
 
-      this.authService.signUp(email,password)
-      .subscribe(
-        ()=>console.log("USER CREATED SUCCESFULLY"),
-        console.error
-        );
+      // this.authService.signUp(email,password)
+      // .subscribe(
+      //   ()=>console.log("USER CREATED SUCCESFULLY"),
+      //   console.error
+      //   );
       
       
     // }

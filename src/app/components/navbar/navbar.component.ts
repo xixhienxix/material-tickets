@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login/login.component';
-import { AuthService } from 'services/auth.service';
 import { Observable } from 'rxjs';
 import { Usuario } from 'app/models/usuario';
 import { SignupComponent } from '../signup/signup/signup.component';
+import { AuthentificationService } from 'app/authentification.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
     isLoggedOut$:Observable<boolean>;
 
     constructor(
-        private authService : AuthService,
+        private authService : AuthentificationService,
         location: Location,  
         private element: ElementRef, 
         private router: Router,
@@ -39,9 +39,9 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(){
-      this.user$=this.authService.user$;
-      this.isLoggedIn$=this.authService.isLoggedIn$;
-      this.isLoggedOut$=this.authService.isLoggedOut$;
+    //   this.user$=this.authService.user$;
+    //   this.isLoggedIn$=this.authService.isLoggedIn$;
+    //   this.isLoggedOut$=this.authService.isLoggedOut$;
       
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
@@ -56,26 +56,8 @@ export class NavbarComponent implements OnInit {
      });
     }
 
-    singIn(){
-
-    this.modalService.open(SignupComponent, { size: 'sm' });
-
-    }
-
-
     
-    login(){
-
-       const modalRef = this.modalService.open(LoginComponent, { size: 'sm' });
-        modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-            console.log(receivedEntry);
-            })
-        }
-
-    logOut(){
-
-        this.authService.isLoggedOut(0).subscribe()
-    }
+    
 
     sidebarOpen() {
         const toggleButton = this.toggleButton;

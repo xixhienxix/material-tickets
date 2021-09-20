@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'services/auth.service';
 import { AreasService } from 'services/areas.service';
 import { Areas } from 'app/models/areas';
 import { CampanasService } from 'services/campanas.service';
@@ -13,6 +12,7 @@ import { Usuario } from 'app/models/usuario';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthentificationService } from 'app/authentification.service';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     public modal: NgbActiveModal,
     public areaService : AreasService,
     public campanaService:CampanasService,
-    public authService:AuthService,
+    public authService:AuthentificationService,
     public usuarioService:UsuarioService,
     private fb:FormBuilder,
     ) { 
@@ -107,28 +107,24 @@ export class LoginComponent implements OnInit {
     let emailSinWhiteSpaces = email.trim()
     let passwordSinWhiteSpaces = password.trim()
 
-    for(let i=0; i<this.listaUsuarios.length;i++)
-    {
+    // for(let i=0; i<this.listaUsuarios.length;i++)
+    // {
 
-      if(this.listaUsuarios[i].Usuario==passwordSinWhiteSpaces&&this.listaUsuarios[i].Password==emailSinWhiteSpaces)
-      {
-        this.authService.isLoggedIn(this.listaUsuarios[i].ID)
-        .subscribe((response)=>{
+    //   if(this.listaUsuarios[i].Usuario==passwordSinWhiteSpaces&&this.listaUsuarios[i].Password==emailSinWhiteSpaces)
+    //   {
+    //     this.authService.isLoggedIn(this.listaUsuarios[i].ID)
+    //     .subscribe((response)=>{
 
-          this.mensaje="Sesion Iniciada con exito ";
-          this.passEntry.emit(this.listaUsuarios[i]);
-          // const modalRef = this.modalService.open(this.espere,{size:'sm'});
-          this.modal.close();
-        });
-      }else
-      this.logineado==false
-    }
+    //       this.mensaje="Sesion Iniciada con exito ";
+    //       this.passEntry.emit(this.listaUsuarios[i]);
+    //       // const modalRef = this.modalService.open(this.espere,{size:'sm'});
+    //       this.modal.close();
+    //     });
+    //   }else
+    //   this.logineado==false
+    // }
 
-      // this.authService.login(email,password)
-      // .subscribe(
-      //   ()=>console.log("USER CREATED SUCCESFULLY"),
-      //   console.error
-      //   );
+
   }
 
   openMini(exito) {

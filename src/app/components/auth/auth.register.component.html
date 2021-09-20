@@ -1,0 +1,46 @@
+<div style="background-image: url(/src/assets/img/experiencia-01.jpg);" class="row">
+    <div   class="col-sm-4">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Registro</h4>
+            </div>
+            <div class="card-body">
+                  
+               <form #ngFormRegistro="ngForm" (ngSubmit)="registro(ngFormRegistro)">
+                <div class="row">
+                  <h4 class="col-sm-12">Area: </h4>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Selecciona Area</mat-label>
+                    <mat-select ngModel name="areaRegistro" #selected>
+                      <ng-container *ngFor="let area of listaAreas">
+                        <mat-option value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
+                    </ng-container>  
+                    </mat-select>
+                    </mat-form-field>                    
+                  </div>
+                <div class="row">
+                    <h4 class="col-sm-12">Nombre Completo: </h4>
+                    <input ngModel name="nombreRegistro"  minlength="5" required autocomplete="off" class="form-control" #nombreRegistro>
+                </div>
+                <br>
+                <div class="row">
+                  <h4 class="col-sm-12">Email: </h4>
+                  <input ngModel name="usuarioRegistro" type="email" minlength="5" required autocomplete="off" class="form-control" #emailRegistro>
+              </div>
+              <br>
+
+              <div class="row">
+                  <h4 class="col-sm-12">Contraseña: </h4>
+                  <input ngModel name="paswordRegistro" type="password" class="form-control" #passwordRegistro>
+              </div>
+              
+              <br>
+               <!--(click)="signIn(password.value,email.value);"-->
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right" >Guardar Registro</button>
+              </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

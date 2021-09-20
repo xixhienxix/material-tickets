@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario } from 'app/models/usuario';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -9,7 +11,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    // { path: '/tickets', title: 'Tickets',  icon: 'content_paste', class: '' }
+    { path: '/tickets', title: 'Tickets',  icon: 'content_paste', class: '' }
     // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     // { path: '/nuevo-ticket', title: 'Tickets',  icon:'content_paste', class: '' },
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
@@ -27,10 +29,13 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  usuario:Usuario;
+  
+  constructor(public router : Router) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.usuario =  JSON.parse(localStorage.getItem('USUARIO'));
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
@@ -38,4 +43,17 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
-}
+    cerrarSesion()
+    {
+        localStorage.removeItem('AREA')
+        localStorage.removeItem('ROL')
+        localStorage.removeItem('ACCESS_TOKEN')
+        localStorage.removeItem('CURRENT_USER')
+        localStorage.removeItem('EXPIRES_IN')
+        localStorage.removeItem('EMAIL')
+
+        this.router.navigate(['auth'])
+        
+    }
+  }
+

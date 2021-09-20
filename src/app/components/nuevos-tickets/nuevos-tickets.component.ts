@@ -28,6 +28,9 @@ export class NuevosTicketsComponent implements OnInit {
   public listaAreas:Areas[];
   public listaUsuarios:Usuario[];
   public listaCampanas:Campanas[]=[];
+  public listaUsuariosPorArea:Usuario[]=[];
+  public listaPlanteles:[]=[];
+  receptor:string;
   closeResult: string;
   usuario:Usuario;
 
@@ -39,12 +42,14 @@ export class NuevosTicketsComponent implements OnInit {
     public modal: NgbActiveModal,
     private http: HttpClient,
     public ticketService:TicketService,
-    public campanaService:CampanasService,) { }
+    public campanaService:CampanasService
+    ) { }
 
     ngOnInit() {
       this.getCampanas();
       this.getAreas();
       this.getUsuarios();
+      this.getPlanteles();
     }
   
     close(){
@@ -63,7 +68,35 @@ export class NuevosTicketsComponent implements OnInit {
     {
       this.areaService.getAreas()
       .subscribe((response)=>{
-        this.listaAreas=response
+        const rol=localStorage.getItem('ROL')
+
+        if(rol=='Administrador'){
+          this.listaAreas=response
+        }else{
+          
+          this.listaAreas=response.filter(response=>response.plantel==localStorage.getItem('PLANTEL'))
+        }
+      })
+    }
+
+    getPlanteles()
+    {
+      this.areaService.getPlanteles()
+      .subscribe((response:[])=>{
+        const rol=localStorage.getItem('ROL')
+        if(rol=='Administrador')
+        {
+          for(let i=0; i<response.length;i++){
+
+            this.listaPlanteles.push(response[i])
+          }
+        }else{
+
+          for(let i=0; i<response.length;i++){
+            if(response[i]==localStorage.getItem('PLANTEL'))
+              {this.listaPlanteles.push(response[i])}
+          }
+        }
       })
     }
 
@@ -75,8 +108,13 @@ export class NuevosTicketsComponent implements OnInit {
       })
     }
   
-    guardaTicket(campana:string,responsable,descripcion)
+    onChange(event:any){
+
+      this.receptor=event.source.selected.viewValue;
+    }
+    guardaTicket(campana:string,responsable:string,descripcion:string)
     {
+      console.log(this.receptor)
         var date = new Date();
 
         let estatus = 1 
@@ -92,7 +130,8 @@ export class NuevosTicketsComponent implements OnInit {
         var date3= new Date();
     
         let hora_abierto = date3.getHours()+":"+date3.getMinutes()+":"+date3.getSeconds();
-    
+
+      
     
         let tickets: Tickets = {
           ID:1,
@@ -106,10 +145,11 @@ export class NuevosTicketsComponent implements OnInit {
           Fecha_Fin:fecha_fin,
           Fecha_Seguimeinto:fecha_seguimeinto,
           Hora_Abierto:hora_abierto,
-          Color:"#21D864"
+          Color:"#21D864",
+          nota_completado:''
           };
-          
-          this.ticketService.postTickets(tickets)
+          let email=localStorage.getItem('EMAIL')
+          this.ticketService.postTickets(tickets,email,this.receptor)
           .subscribe(
           res => console.log('HTTP response', res),
           err => console.log('HTTP Error', err),
@@ -117,9 +157,16 @@ export class NuevosTicketsComponent implements OnInit {
           {            
             this.openMini(this.exito)
           })
-      
+      this.ticketService.getTickets();
     }
   
+
+    filtroAreas(value:string){
+      this.listaUsuariosPorArea = this.listaUsuarios.filter(areas=> areas.Area==value)
+
+      console.log(this.listaUsuariosPorArea)
+    }
+
     openMini(exito) {
   
       this.modalService.open(exito,{ size: 'sm' }).result.then((result) => {

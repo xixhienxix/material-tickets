@@ -17,7 +17,10 @@ export class AreasService  {
     {
         return this.http.get<Areas[]>(environment.apiUrl+"/areas")
     }
-  
+    getPlanteles(){
+      console.log(environment.apiUrl+'/plantel')
+      return this.http.get(environment.apiUrl+'/plantel')
+  }
 
 
   constructor(private http: HttpClient) { }

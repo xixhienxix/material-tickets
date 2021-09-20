@@ -14,4 +14,5 @@ export interface Tickets
   Fecha_Seguimeinto:Date;
   Hora_Abierto:String;
   Color:string;
+  nota_completado:string;
 }

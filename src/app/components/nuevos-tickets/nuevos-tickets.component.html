@@ -8,12 +8,22 @@
                     </div>
                     <div class="card-body">
                         <form>
+                          <h4>Selecciona el Plantel: </h4>
+                            <mat-form-field appearance="fill">
+                            <mat-label>Selecciona Plantel</mat-label>
+                            <mat-select #plantel>
+                              <ng-container *ngFor="let plantel of listaPlanteles">
+                                <mat-option  value="{{plantel.plantel}}">{{plantel.plantel}}</mat-option>
+                            </ng-container>  
+                            </mat-select>
+                            </mat-form-field>
+
                             <h4>Selecciona Area: </h4>
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Area</mat-label>
                             <mat-select #selected>
                               <ng-container *ngFor="let area of listaAreas">
-                                <mat-option value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
+                                <mat-option (click)="filtroAreas(selected.value)" value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
                             </ng-container>  
                             </mat-select>
                             </mat-form-field>
@@ -21,9 +31,9 @@
                             <h4>Responsable</h4>
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Responsable</mat-label>
-                            <mat-select #responsable>
-                              <ng-container *ngFor="let usuario of listaUsuarios">
-                                <mat-option value="{{usuario.Nombre}}">{{usuario.Nombre}}</mat-option>
+                            <mat-select (selectionChange)="onChange($event)" #responsable>
+                              <ng-container *ngFor="let usuario of listaUsuariosPorArea">
+                                  <mat-option value="{{usuario.Usuario}}">{{usuario.Nombre}}</mat-option>                    
                             </ng-container>  
                             </mat-select>
                             </mat-form-field>

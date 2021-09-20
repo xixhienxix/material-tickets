@@ -4,6 +4,9 @@ import { HttpClient } from "@angular/common/http";
 import { TicketService } from '../../../../services/tickets.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Tickets } from 'app/models/tickets';
+import { PreguntasService } from 'services/preguntas.service';
+import { Preguntas } from 'app/models/preguntas';
 
 @Component({
   selector: 'completar-ticket',
@@ -11,21 +14,42 @@ import { ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./completar-ticket.component.css']
 })
 export class CompletarTicketComponent implements OnInit {
-  id: number;
+  ticket: Tickets;
   uploadedFiles: Array < File > ;
   closeResult: string;
+  preguntasArray:Preguntas[]=[]
 
   constructor(
     private modalService: NgbModal,
     public modal: NgbActiveModal,
     private http: HttpClient,
     public ticketService:TicketService,
-
+    public preguntasService:PreguntasService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.id)
+    this.getPreguntas();
   }
+
+  getPreguntas(){
+    this.preguntasService.getPreguntas().subscribe(
+      (preguntas)=>{
+        for(let i=0;i<preguntas.length;i++)
+        if(preguntas[i].area==localStorage.getItem('AREA'))
+        {
+          this.preguntasArray.push(preguntas[i])
+        }
+      },
+      (err)=>
+      {
+        if(err)
+        {
+          console.log(err)
+        }
+      }
+    )
+  }
+
   fileChange(element) {
     this.uploadedFiles = element.target.files;
   }
@@ -42,9 +66,9 @@ export class CompletarTicketComponent implements OnInit {
   close(){
     this.modal.close();
   }
-  completarTicket(id:number)
+  completarTicket(id:number,descripcionCompletado:string)
   {
-    this.ticketService.completarTicket(id).subscribe(
+    this.ticketService.completarTicket(id,descripcionCompletado).subscribe(
       ()=>{
         console.log("Ticket Completado con exito")
         this.ticketService.getTickets();
