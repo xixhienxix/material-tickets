@@ -62,15 +62,18 @@
             </a>
         </li>
     </ul>
-    <div style="text-align: center; position: absolute; bottom: 50px;left: 10%;">
+    <div  style="text-align: center; position: absolute; bottom: 120px;left: 10%;">
 
         <div class="row"> {{usuario.Area}}</div>
         <div class="row"> {{usuario.Rol}}</div>
         <div class="row"> {{usuario.Nombre}}</div>
         <div class="row"> {{usuario.Usuario}}</div>
         <div class="row">{{usuario.plantel}}</div>
-       </div>
-    <div>
-        <button  class="btn" type="button" style="position: absolute;left: 10%; bottom: 0; color: white; background-color: #bd3fa2; width: 200px;" (click)="cerrarSesion()">Cerrar Sesion</button>
     </div>
+        <div>
+            <button  class="btn" type="button" style="position: absolute;left: 10%; bottom: 50px; color: white; background-color: #3fb5bd; width: 200px;" (click)="changePassword()">Cambiar Contraseña</button>
+        </div>
+        <div>
+            <button  class="btn" type="button" style="position: absolute;left: 10%; bottom: 0; color: white; background-color: #bd3fa2; width: 200px;" (click)="cerrarSesion()">Cerrar Sesion</button>
+        </div>
 </div>

@@ -34,7 +34,7 @@ constructor(
 ngOnInit(){
   this.loginForm =  this.formBuilder.group({
     email : ['',Validators.required],
-    password: ['',Validators.required]
+    password: ['',Validators.required],
   })
   this.getAreas();
 }
@@ -71,7 +71,10 @@ onSubmit(){
       }
       },
       (err)=>{
-        if(err=='Bad Request'){err='Usuario o Contraseña Invalidos'}
+        if(err=='Bad Request'||'Unknown Error')
+          {
+            err='Usuario o Contraseña Invalidos'
+          }
           this.alertService.error(err);
           this.loading = false;        
       },

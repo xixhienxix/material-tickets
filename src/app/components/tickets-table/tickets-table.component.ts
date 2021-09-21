@@ -246,14 +246,36 @@ export class TicketsTableComponent implements OnInit {
   {
       const modalRef = this.modalService.open(NuevosTicketsComponent, { size: 'md' });
       modalRef.componentInstance.usuario=this.usuarioEnLinea  
+      modalRef.closed.subscribe(
+        ()=>{
+          this.refresh();
+        },
+        (err)=>{
+          if(err){console.log(err)}
+        },
+        ()=>{
+          console.log("mnodal closed")
+        }
+        )
   }
 
   completar(ticket:Tickets)
   {
-  if(localStorage.getItem('CURRENT_USER')==ticket.Responsable||localStorage.getItem('ROL')=='Administrador')
+  if(localStorage.getItem('EMAIL')==ticket.Responsable||localStorage.getItem('ROL')=='Administrador')
       {
         const modalRef = this.modalService.open(CompletarTicketComponent);
         modalRef.componentInstance.ticket = ticket;
+        modalRef.closed.subscribe(
+          ()=>{
+            this.refresh();
+          },
+          (err)=>{
+            if(err){console.log(err)}
+          },
+          ()=>{
+            console.log("mnodal closed")
+          }
+          )
       }
     else 
     {

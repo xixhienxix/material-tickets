@@ -15,12 +15,15 @@ import { Areas } from 'app/models/areas';
 import { UsuarioService } from 'services/usuario.service';
 import { Usuario } from 'app/models/usuario';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
+import { Plantel } from 'app/models/plantel';
+import { TicketsTableComponent } from '../tickets-table/tickets-table.component';
 
 @Component({
   selector: 'nuevos-tickets',
   templateUrl: './nuevos-tickets.component.html',
   styleUrls: ['./nuevos-tickets.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+
 
 })
 export class NuevosTicketsComponent implements OnInit {
@@ -29,12 +32,13 @@ export class NuevosTicketsComponent implements OnInit {
   public listaUsuarios:Usuario[];
   public listaCampanas:Campanas[]=[];
   public listaUsuariosPorArea:Usuario[]=[];
-  public listaPlanteles:[]=[];
+  public listaPlanteles:Plantel[]=[];
   receptor:string;
   closeResult: string;
   usuario:Usuario;
 
   @ViewChild('exito') exito=null;
+
 
   constructor( private modalService: NgbModal,
     public areaService:AreasService,
@@ -42,7 +46,7 @@ export class NuevosTicketsComponent implements OnInit {
     public modal: NgbActiveModal,
     private http: HttpClient,
     public ticketService:TicketService,
-    public campanaService:CampanasService
+    public campanaService:CampanasService,
     ) { }
 
     ngOnInit() {
@@ -70,19 +74,19 @@ export class NuevosTicketsComponent implements OnInit {
       .subscribe((response)=>{
         const rol=localStorage.getItem('ROL')
 
-        if(rol=='Administrador'){
+        // if(rol=='Administrador'){
           this.listaAreas=response
-        }else{
+        // }else{
           
-          this.listaAreas=response.filter(response=>response.plantel==localStorage.getItem('PLANTEL'))
-        }
+          // this.listaAreas=response.filter(response=>response.plantel==localStorage.getItem('PLANTEL'))
+        // }
       })
     }
 
     getPlanteles()
     {
       this.areaService.getPlanteles()
-      .subscribe((response:[])=>{
+      .subscribe((response:Plantel[])=>{
         const rol=localStorage.getItem('ROL')
         if(rol=='Administrador')
         {
@@ -93,7 +97,7 @@ export class NuevosTicketsComponent implements OnInit {
         }else{
 
           for(let i=0; i<response.length;i++){
-            if(response[i]==localStorage.getItem('PLANTEL'))
+            if(response[i].plantel==localStorage.getItem('PLANTEL'))
               {this.listaPlanteles.push(response[i])}
           }
         }

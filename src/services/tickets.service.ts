@@ -36,5 +36,7 @@ export class TicketService  {
     return this.http.post(environment.apiUrl+"/reportes/tickets/"+id,{descripcionCompletado},{observe:'response'})
     }
 
+
+
   constructor(private http: HttpClient) { }
 }

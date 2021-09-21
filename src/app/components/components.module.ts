@@ -18,6 +18,7 @@ import { LoginComponentJwt } from './auth/login/login.component';import { AuthCo
 import { AuthRegisterComponent } from './auth/auth.register.component';
 import { AlertComponent } from 'app/_directives/alert.component';
 import { TicketsTableComponent } from './tickets-table/tickets-table.component';
+import { PasswordComponent } from './password/password/password.component';
  ''
 @NgModule({
   imports: [
@@ -42,13 +43,15 @@ import { TicketsTableComponent } from './tickets-table/tickets-table.component';
     LoginComponentJwt,
     AuthComponent,
     AuthRegisterComponent,
-    TicketsTableComponent
+    TicketsTableComponent,
+    PasswordComponent
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent
-  ]
+  ],
+  
 
 })
 export class ComponentsModule { }

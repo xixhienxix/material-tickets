@@ -21,6 +21,10 @@ export class AuthentificationService {
     }))
    }
 
+   changePassword(ID:string,nueva:string){
+     return this.http.post(environment.apiUrl+"/change",{ID:ID,nueva:nueva})
+   }
+
    saveToken(token:string,expiresIn:string,user:string,rol:string,area:string,email:string,plantel:string,usuario:Usuario):void{
     localStorage.setItem('ACCESS_TOKEN',token);
     localStorage.setItem('CURRENT_USER',user);

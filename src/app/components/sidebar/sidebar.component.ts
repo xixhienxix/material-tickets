@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'app/models/usuario';
-
+import { PasswordComponent } from '../password/password/password.component';
 declare const $: any;
 declare interface RouteInfo {
     path: string;
@@ -31,7 +32,8 @@ export class SidebarComponent implements OnInit {
 
   usuario:Usuario;
   
-  constructor(public router : Router) { }
+  constructor(public router : Router,
+    public modalService:NgbModal) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -43,6 +45,14 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
+
+  changePassword(){
+
+    const modalRef = this.modalService.open(PasswordComponent,{size:'sm'})
+    modalRef.componentInstance.usuario = JSON.parse(localStorage.getItem('USUARIO'))
+    
+  }
+
     cerrarSesion()
     {
         localStorage.removeItem('AREA')
