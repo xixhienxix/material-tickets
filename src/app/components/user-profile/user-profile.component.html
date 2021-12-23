@@ -1,0 +1,123 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                    <ng-container *ngIf="!actualizaUser">
+                      <h4  class="card-title">Alta de Usuario</h4>
+                      <p class="card-category">Completa tu Perfil</p>
+                    </ng-container>  
+                    <ng-container *ngIf="actualizaUser">
+                      <h4  class="card-title">Actualiza Usuario</h4>
+                      <p class="card-category">Completa tu Perfil</p>
+                    </ng-container> 
+                  </div>
+                  <div class="card-body">
+                      <form [formGroup]="formGroup">
+                          <div class="row">
+                              <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Empresa" disabled value="UNIVER">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-7">
+                                  <mat-form-field class="example-full-width">
+                                    <input  matInput placeholder="Email" type="email" #usuario >
+                                  </mat-form-field>
+                                  
+                              </div>
+                              <div class="col-md-1 input-group-append">
+                                <button  matTooltip="Buscar Usuario"
+                                matTooltipPosition="below"
+                                matTooltipHideDelay="100000" (click)="buscarUsuario(usuario.value)" style="background-color: transparent;border-right: 2px solid #e6e9ed; border-left: 2px solid #dadcdf; border-top : 2px solid #dadcdf; border-bottom: 2px solid #dadcdf;" class="btn btn-secondary" type="button" ng-click="countVal=countVal+1">
+                                  <i class="fa fa-search">
+                                  </i>
+                                </button>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Nombre Completo" type="text" formControlName='Nombre'>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select placeholder="Area" formControlName='Area'>
+                                    <ng-container *ngFor="let areas of areaList"  >
+                                    <mat-option [value]="areas.Descripcion">
+                                      {{areas.Descripcion}}
+                                    </mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select placeholder="Rol" formControlName='Rol'>
+                                    <ng-container *ngFor="let rol of rolList">
+                                      <mat-option [value]="rol">
+                                        {{rol}}
+                                      </mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Contraseña" type="text" formControlName='Password'>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select placeholder="Plantel" formControlName='Plantel'>
+                                    <ng-container *ngFor="let planteles of plantelesList"  >
+                                    <mat-option [value]="planteles.plantel">
+                                      {{planteles.plantel}}
+                                    </mat-option>
+                                    </ng-container>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Puesto" type="text" formControlName='Puesto'>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <button (click)="agregarUsuario(usuario.value)"  mat-raised-button type="submit" class="btn btn-danger pull-right">Agregar Usuario</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div *ngIf="usuarioExistente" class="col-md-4">
+              <div class="card card-profile">
+                  <div class="card-avatar">
+                      <a href="javascript:void(0)">
+                          <img class="img" src="./assets/img/faces/arturo.jpg" />
+                      </a>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-category text-gray">Docente / Rectoria</h6>
+                      <h4 class="card-title">Arturo Martinez Farias</h4>
+                      <p class="card-description">
+                          Soporte PowerCampus
+                      </p>
+                      <a href="#" class="btn btn-danger btn-round">Email</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<loader-spinner *ngIf="isLoading"></loader-spinner>

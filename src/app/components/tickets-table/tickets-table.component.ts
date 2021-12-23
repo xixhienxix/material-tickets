@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal,NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AuthentificationService } from 'app/authentification.service';
 import { Tickets } from 'app/models/tickets';
 import { Usuario } from 'app/models/usuario';
@@ -13,12 +13,41 @@ import { NuevosTicketsComponent } from '../nuevos-tickets/nuevos-tickets.compone
 @Component({
   selector: 'tickets-table',
   templateUrl: './tickets-table.component.html',
-  styleUrls: ['./tickets-table.component.css']
+  styleUrls: ['./tickets-table.component.css'],
+  styles: [`
+  .form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+  .custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+  }
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+  .custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+  }
+  .custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+  }
+`]
 })
 export class TicketsTableComponent implements OnInit {
   @ViewChild('error') error= null;
   @ViewChild('exito') exito= null;
 
+  hoveredDate: NgbDate | null = null;
+
+  today: NgbDate | null;
+  yesterday: NgbDate | null;
 
   public listaTickets:Tickets[]=[];
   public listaTicketsNuevos:Tickets[]=[];
@@ -35,6 +64,9 @@ export class TicketsTableComponent implements OnInit {
   public listaRodrigoCompletos:Tickets[]=[];
   public listaOctavioCompletos:Tickets[]=[];
   public listaCharlyCompletos:Tickets[]=[];
+  model: NgbDateStruct;
+  modelFin: NgbDateStruct;
+
   mensaje:string;
   listaUsuarios:Usuario[]=[];
   reloadInterval:number = 60;
@@ -45,6 +77,8 @@ export class TicketsTableComponent implements OnInit {
   porcentajediaAnterior:number
   vencidosdiaAnterior:number
   banderaLogin:boolean=false
+  todayString:string;
+
   usuarioEnLinea:Usuario=  {
     ID:undefined,
     Usuario:'',
@@ -52,8 +86,8 @@ export class TicketsTableComponent implements OnInit {
     Area:'',
     Rol:'',
     Password:'',
-    conectado:0,
-    plantel:'On-Line'
+    plantel:'On-Line',
+    Puesto:''
   }
 
   
@@ -62,12 +96,24 @@ export class TicketsTableComponent implements OnInit {
     private http: HttpClient,
     public ticketService:TicketService,
     public usuarioService:UsuarioService,
-    public authService:AuthentificationService
-  ) { }
+    public authService:AuthentificationService,
+    private calendar: NgbCalendar, 
+    public formatter: NgbDateParserFormatter,
+    public i18n: NgbDatepickerI18n 
+  )
+  { 
+    this.today = calendar.getToday();
+    this.yesterday = calendar.getPrev(this.today);
+
+      this.todayString = this.today.month+"/"+this.today.day+"/"+this.today.year
+    this.model=this.yesterday
+    this.modelFin=this.today
+  }
 
   ngOnInit()  {
     this.getTickets();
     this.getUsuarios();
+    this.usuarioEnLinea=JSON.parse(localStorage.getItem('USUARIO'))
   }
 
   Init(array:Tickets)
@@ -226,6 +272,7 @@ export class TicketsTableComponent implements OnInit {
       ()=>{
       
       })
+      
   }
 
   getUsuarios()
@@ -304,4 +351,23 @@ export class TicketsTableComponent implements OnInit {
     this.getTickets();
   }
 
+  //DATE HELPERSD
+  
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+  fechaIni(ngbDate:NgbDate){
+    const jsDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+    console.log(jsDate)
+
+    console.log("Tickedts Completados Sin Filtro:",this.listaTicketsCompletas)  
+
+    this.listaTicketsCompletas.filter((item) =>
+    item.Fecha_Fin.getTime() >= jsDate.getTime())
+
+    console.log("Tickedts Completados Filtrados:",this.listaTicketsCompletas)  
+  }
 }
+

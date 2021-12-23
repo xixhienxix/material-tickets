@@ -17,6 +17,7 @@ import { Usuario } from 'app/models/usuario';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { Plantel } from 'app/models/plantel';
 import { TicketsTableComponent } from '../tickets-table/tickets-table.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'nuevos-tickets',
@@ -29,13 +30,19 @@ import { TicketsTableComponent } from '../tickets-table/tickets-table.component'
 export class NuevosTicketsComponent implements OnInit {
   public listaTickets:Tickets[];
   public listaAreas:Areas[];
+  public listaAreasFiltradas:Areas[];
   public listaUsuarios:Usuario[];
   public listaCampanas:Campanas[]=[];
   public listaUsuariosPorArea:Usuario[]=[];
   public listaPlanteles:Plantel[]=[];
+  public listaUsuariosPorPlantel:Usuario[]=[];
+  formGroup:FormGroup;
+  selectedPlantel =''; 
   receptor:string;
   closeResult: string;
   usuario:Usuario;
+
+
 
   @ViewChild('exito') exito=null;
 
@@ -47,14 +54,25 @@ export class NuevosTicketsComponent implements OnInit {
     private http: HttpClient,
     public ticketService:TicketService,
     public campanaService:CampanasService,
+    private fb : FormBuilder,
     ) { }
 
     ngOnInit() {
+      this.initForm();
       this.getCampanas();
       this.getAreas();
       this.getUsuarios();
       this.getPlanteles();
     }
+
+    initForm(){
+      this.formGroup = this.fb.group({
+        plantel : ['',Validators.required],
+        area:['',Validators.required],
+        responsable : ['',Validators.required]
+      })
+    }
+    get f() {return this.formGroup.controls}
   
     close(){
       this.modal.close();
@@ -88,7 +106,9 @@ export class NuevosTicketsComponent implements OnInit {
       this.areaService.getPlanteles()
       .subscribe((response:Plantel[])=>{
         const rol=localStorage.getItem('ROL')
-        if(rol=='Administrador')
+        const area=localStorage.getItem('AREA')
+
+        if(rol=='Administrador'||rol=='Supervisor'||area=='S.A.U.')
         {
           for(let i=0; i<response.length;i++){
 
@@ -164,9 +184,21 @@ export class NuevosTicketsComponent implements OnInit {
       this.ticketService.getTickets();
     }
   
+    filtroPlantel(){
 
-    filtroAreas(value:string){
-      this.listaUsuariosPorArea = this.listaUsuarios.filter(areas=> areas.Area==value)
+      this.listaAreasFiltradas=[]
+      this.listaUsuariosPorArea=[]
+
+      this.listaUsuariosPorPlantel = this.listaUsuarios.filter(plantel=> plantel.plantel==this.f.plantel.value)
+      // this.listaAreas = this.listaAreas.filter(areas=>areas.plantel==value)
+      this.listaAreasFiltradas = this.listaAreas.filter(plantel=>plantel.plantel==this.f.plantel.value)
+      console.log(this.listaAreas)
+    }
+
+
+    filtroAreas(plantel:string,value:string){
+
+      this.listaUsuariosPorArea = this.listaUsuarios.filter(areas=> areas.Area==value && areas.plantel==plantel)
 
       console.log(this.listaUsuariosPorArea)
     }
@@ -190,7 +222,10 @@ export class NuevosTicketsComponent implements OnInit {
           return  `with: ${reason}`;
       }
     }
+    closeModal(){
+      this.modal.close();
+    }
   
-    
+
   }
   

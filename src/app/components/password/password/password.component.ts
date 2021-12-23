@@ -55,8 +55,7 @@ export class PasswordComponent implements OnInit {
     .subscribe(
       (value)=>{
         if(value){
-          this.openMini(this.exito)
-
+         this.openMini(this.exito)
         }
         },
         (err)=>{
@@ -75,7 +74,9 @@ export class PasswordComponent implements OnInit {
   openMini(exito) {
   
    const modalRef = this.modalService.open(exito,{ size: 'sm' })
-    
+   setTimeout(() => {
+    modalRef.close('Close click');
+  },4000)
     modalRef.closed.subscribe(
       ()=>{
         this.router.navigate(['auth'])

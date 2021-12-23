@@ -1,3 +1,10 @@
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
     z-index: 99999 !important;
  }
+ #x {
+    position: absolute;
+    background: red;
+    color: white;
+    top: 0px;
+    right: 0px;
+}

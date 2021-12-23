@@ -11,7 +11,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
@@ -34,7 +34,7 @@ import { AuthGuard } from './components/auth/_guards/auth.guard';
 import { AlertService } from 'services/alert.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -51,6 +51,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     MatStepperModule,
     MatCardModule,
     TextFieldModule,
+    NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -58,7 +59,6 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
   ],
   providers: [AuthGuard,AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -14,11 +14,14 @@ import { CompletarTicketComponent } from './completar-ticket/completar-ticket/co
 import { LoginComponent } from './login/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup/signup.component';
-import { LoginComponentJwt } from './auth/login/login.component';import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './auth/auth.component';
 import { AuthRegisterComponent } from './auth/auth.register.component';
 import { AlertComponent } from 'app/_directives/alert.component';
 import { TicketsTableComponent } from './tickets-table/tickets-table.component';
 import { PasswordComponent } from './password/password/password.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModuleModule } from 'app/shared/shared-module/shared-module.module';
+import { AlertsComponent } from './alerts/alerts.component';
  ''
 @NgModule({
   imports: [
@@ -30,6 +33,9 @@ import { PasswordComponent } from './password/password/password.component';
     TextFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
+    SharedModuleModule
+    
   ],
   declarations: [
     FooterComponent,
@@ -40,11 +46,12 @@ import { PasswordComponent } from './password/password/password.component';
     CompletarTicketComponent,
     LoginComponent,
     SignupComponent,
-    LoginComponentJwt,
     AuthComponent,
     AuthRegisterComponent,
     TicketsTableComponent,
-    PasswordComponent
+    PasswordComponent,
+    AlertsComponent,
+
   ],
   exports: [
     FooterComponent,

@@ -55,10 +55,22 @@
     </ul>
   </div> -->
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+        <li routerLinkActive="active" class="{{menuItems[0].class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItems[0].path]">
+                <i class="material-icons">{{menuItems[0].icon}}</i>
+                    <p>{{menuItems[0].title}}</p>                
+            </a>
+        </li>
+        <li routerLinkActive="active" class="{{menuItems[1].class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItems[1].path]">
+                <i class="material-icons">{{menuItems[1].icon}}</i>
+                    <p>{{menuItems[1].title}}</p>                
+            </a>
+        </li>
+        <li *ngIf="rol=='Administrador'" routerLinkActive="active" class="{{menuItems[2].class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItems[2].path]">
+                <i class="material-icons">{{menuItems[2].icon}}</i>
+                    <p>{{menuItems[2].title}}</p>                
             </a>
         </li>
     </ul>

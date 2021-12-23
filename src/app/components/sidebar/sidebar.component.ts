@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'app/models/usuario';
 import { PasswordComponent } from '../password/password/password.component';
 declare const $: any;
+
 declare interface RouteInfo {
     path: string;
     title: string;
@@ -12,8 +13,8 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '/tickets', title: 'Tickets',  icon: 'content_paste', class: '' }
-    // { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
+    { path: '/tickets', title: 'Tickets',  icon: 'content_paste', class: '' },
+    { path: '/user-profile', title: 'Alta de Usuarios',  icon:'person', class: '' },
     // { path: '/nuevo-ticket', title: 'Tickets',  icon:'content_paste', class: '' },
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
@@ -29,13 +30,18 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-
+  rol:string;
   usuario:Usuario;
   
   constructor(public router : Router,
-    public modalService:NgbModal) { }
+    public modalService:NgbModal) { 
+     
+    }
 
   ngOnInit() {
+
+    console.log(localStorage.getItem('ROL'))
+    this.rol=localStorage.getItem('ROL')
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.usuario =  JSON.parse(localStorage.getItem('USUARIO'));
   }

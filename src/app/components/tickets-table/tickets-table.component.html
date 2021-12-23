@@ -63,9 +63,12 @@
                             </div>
                         </div>
                     </div>
-                    <button (click)="refresh()" class="btn btn-secondary">
-                        Actualiza Datos
-                    </button>
+                    
+    <button style="right: 0;" (click)="refresh()" class="btn btn-warning">
+        Actualiza Datos
+    </button> 
+                    <div class="row">           
+                   
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="nuevas">
@@ -81,6 +84,9 @@
                                           <td>
                                             Descripcion
                                           </td>
+                                          <td>
+                                            Creado Por
+                                        </td>
                                           <td>
                                               Responsable
                                           </td>
@@ -108,6 +114,9 @@
                                               </td>
                                               <td>{{tickets.Area}}</td>
                                               <td>{{tickets.Descripcion}}</td>
+
+                                              <td>{{tickets.Creado_por}}</td>
+
                                               <td>{{tickets.Responsable}}</td>
                                               <td>{{tickets.Fecha_Inicio.split("T",1)}}</td>
                                               <td>{{tickets.Hora_Abierto}}</td>
@@ -129,6 +138,48 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="completas">
+                                <!-- <div class="row" style="padding-left: 20%;">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label>FECHA INICIAL</label> &nbsp;&nbsp;
+                                            <div class="input-group">
+                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                   name="dp" [(ngModel)]="model" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" (ngModelChange)="fechaIni($event)">
+                                            <div class="input-group-append">
+                                              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">              <i class="fa fa-calendar icon"></i>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <ng-template #footerTemplate>
+                                        <hr class="my-0">
+                                        <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+                                        <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+                                      </ng-template>
+                                      <form class="form-inline">
+                                        <div class="form-group">
+                                            <label>FECHA FINAL</label> &nbsp;&nbsp;
+                                            <div class="input-group">
+                                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                                   name="dpFin" [(ngModel)]="modelFin" ngbDatepicker [footerTemplate]="footerTemplate" #f="ngbDatepicker">
+                                            <div class="input-group-append">
+                                              <button class="btn btn-outline-secondary calendar" (click)="f.toggle()" type="button">
+                                                <i class="fa fa-calendar icon"></i>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      
+                                      <ng-template #footerTemplate>
+                                        <hr class="my-0">
+                                        <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+                                        <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+                                      </ng-template>
+                                </div> -->
+                                   
                                 <table class="table">
                                   <thead>
                                       <tr>

@@ -17,6 +17,15 @@ export class UsuarioService  {
     {
         return this.http.get<Usuario[]>(environment.apiUrl+"/usuarios")
     }
+
+    getUsuariosByEmail(usuario:string)
+    {
+      return this.http.get(environment.apiUrl+'/usuario/'+usuario)
+    }
+
+    agregarUsuario(usuario:Usuario){
+      return this.http.post<Usuario>(environment.apiUrl+'/usuario/nuevo',usuario)
+    }
   
 
   constructor(private http: HttpClient) { }

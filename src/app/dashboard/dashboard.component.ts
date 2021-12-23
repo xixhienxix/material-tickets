@@ -62,8 +62,8 @@ export class DashboardComponent implements OnInit {
     Area:'',
     Rol:'',
     Password:'',
-    conectado:0,
-    plantel:'On-Line'
+    plantel:'On-Line',
+    Puesto:''
   }
 
   constructor(
@@ -262,19 +262,19 @@ export class DashboardComponent implements OnInit {
 
   nvoTicket()
   {
-
-      if(this.usuarioEnLinea.conectado==1)
-      {
-        const modalRef = this.modalService.open(NuevosTicketsComponent, { size: 'md' });
-        modalRef.componentInstance.usuario=this.usuarioEnLinea
-        this.refresh();
-
-      }else if(this.usuarioEnLinea.conectado==0){
-      this.mensaje="Ingrese Sesion para crear un Nuevo Ticket"
-      const modalRef = this.modalService.open(this.exito,{size:'sm'}); 
-      this.refresh();
-   
-      }
+      const modalRef = this.modalService.open(NuevosTicketsComponent, { size: 'md' });
+      modalRef.componentInstance.usuario=this.usuarioEnLinea  
+      modalRef.closed.subscribe(
+        ()=>{
+          this.refresh();
+        },
+        (err)=>{
+          if(err){console.log(err)}
+        },
+        ()=>{
+          console.log("mnodal closed")
+        }
+        )
   }
 
   login(){

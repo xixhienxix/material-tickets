@@ -66,6 +66,12 @@ export class CompletarTicketComponent implements OnInit {
   close(){
     this.modal.close();
   }
+
+  submitFile(event:any)
+  {
+console.log(event)
+  }
+
   completarTicket(id:number,descripcionCompletado:string)
   {
     this.ticketService.completarTicket(id,descripcionCompletado).subscribe(
@@ -102,4 +108,5 @@ export class CompletarTicketComponent implements OnInit {
         return  `with: ${reason}`;
     }
   }
+
 }

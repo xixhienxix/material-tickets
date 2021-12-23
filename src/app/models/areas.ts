@@ -2,7 +2,7 @@
 
 export interface Areas
 {
-  id:number;
-  descripcion:string;
+  Id:number;
+  Descripcion:string;
   plantel:string;
 }

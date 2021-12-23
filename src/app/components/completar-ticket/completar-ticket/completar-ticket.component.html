@@ -5,6 +5,8 @@
                 <div class="card">
                     <div class="card-header card-header-success">
                         <h4 class="card-title">Completar Ticket</h4>
+                        <button style=" background-color:#fa6d7c; font-weight: bold; color: white;" class="btn" id="x" (click)="close()"> X </button>
+
                     </div>
                     <div class="card-body">
                         <form>
@@ -53,7 +55,18 @@
                             <div class="clearfix"></div>
 
                         </form>
-                        
+
+                        <input
+                        type="file"
+                        name="file"
+                        id="input-files"
+                        class="form-control-file border"
+                      />     
+                      <button
+                      class="btn btn-success"
+                      (click)="submitFile($event)">
+
+                      </button>                   
                         <!-- <div class="row">
                             <span  class="input-group-text upload"  (click)="upload()"  id="btnUpload">Subir Evidencia</span>
                             <input  (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">

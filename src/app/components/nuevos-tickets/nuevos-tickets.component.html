@@ -5,25 +5,28 @@
                 <div class="card">
                     <div class="card-header card-header-success">
                         <h4 class="card-title">Nuevo Ticket</h4>
+                        <button style=" background-color:#fa6d7c; font-weight: bold; color: white;" class="btn" id="x" (click)="closeModal()"> X </button>
+
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="formGroup">
                           <h4>Selecciona el Plantel: </h4>
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Plantel</mat-label>
-                            <mat-select #plantel>
+                            <mat-select formControlName="plantel" #plantel>
                               <ng-container *ngFor="let plantel of listaPlanteles">
-                                <mat-option  value="{{plantel.plantel}}">{{plantel.plantel}}</mat-option>
+                                <mat-option  value="{{plantel.plantel}}" (click)="filtroPlantel()">{{plantel.plantel}}</mat-option>
                             </ng-container>  
+                            {{selectedPlantel}}
                             </mat-select>
                             </mat-form-field>
 
                             <h4>Selecciona Area: </h4>
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Area</mat-label>
-                            <mat-select #selected>
-                              <ng-container *ngFor="let area of listaAreas">
-                                <mat-option (click)="filtroAreas(selected.value)" value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
+                            <mat-select formControlName="area" #selected>
+                              <ng-container *ngFor="let area of listaAreasFiltradas">
+                                <mat-option (click)="filtroAreas(plantel.value,selected.value)" value="{{area.Descripcion}}">{{area.Descripcion}}</mat-option>
                             </ng-container>  
                             </mat-select>
                             </mat-form-field>
@@ -31,9 +34,9 @@
                             <h4>Responsable</h4>
                             <mat-form-field appearance="fill">
                             <mat-label>Selecciona Responsable</mat-label>
-                            <mat-select (selectionChange)="onChange($event)" #responsable>
+                            <mat-select formControlName="responsable" (selectionChange)="onChange($event)" #responsable>
                               <ng-container *ngFor="let usuario of listaUsuariosPorArea">
-                                  <mat-option value="{{usuario.Usuario}}">{{usuario.Nombre}}</mat-option>                    
+                                  <mat-option value="{{usuario.Usuario}}">{{usuario.Nombre}} - {{usuario.Puesto}}</mat-option>                    
                             </ng-container>  
                             </mat-select>
                             </mat-form-field>
