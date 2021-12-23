@@ -4,7 +4,7 @@ export const environment = {
   appVersion: 'v726demo1',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: false,
-  apiUrl:'https://tickets-api-univer.herokuapp.com/api'
+  apiUrl:'http://tickets-api.univer-gdl.info/api'
   //apiUrl:'http://localhost:8081/api'
 
 };
