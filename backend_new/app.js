@@ -1,13 +1,9 @@
-const http = require('http');
 const express = require('express');
-const  multipart  =  require('connect-multiparty');
-const jwt = require('jsonwebtoken')
+// const  multipart  =  require('connect-multiparty');
 const bodyParser = require('body-parser')
-const multer = require('multer')
+// const multer = require('multer')
 const cors = require('cors');
-const bcrypt=require('bcryptjs');
-const private_key='b8b96d8661599441631edc161db8d15c'
-const nodemailer = require('nodemailer')
+
 
 const ticketsController = require('./controllers/tickets')
 const campanasController = require('./controllers/campanas')
@@ -18,22 +14,21 @@ const preguntasController = require('./controllers/preguntas')
 const loginController = require('./controllers/login')
 
 
-  
 
 // Create an instance of the http server to handle HTTP requests
 const app = express();
-app.use(cors()); // <---- use cors middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true,
-}));// Set a response type of plain text for the response
 
-// Send back a response and end the connection
-//res.end('Hello World!\n'); // comment this line   
-// con.connect(function(err) {
-// if (err) throw err;
-// res.end('Connected!');
-// }); 
+app.use(cors());
+
+// Start the server on port 3000
+app.listen(3000, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+  })
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 app.get('/', (request, response) => {
     response.send({
@@ -80,6 +75,7 @@ app.post('/api/signup',loginController.registro)
 app.post('/api/register',loginController.signup)
 app.post('/api/login',loginController.login)
 
-// Start the server on port 3000
-app.listen(3000, '127.0.0.1');
-console.log('Node server running on port 3000');
+app.use(function(error, req, res, next){
+    res.json(error);
+  });
+  

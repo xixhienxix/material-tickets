@@ -1,4 +1,7 @@
 const conn = require('../functions/conections')
+const jwt = require('jsonwebtoken')
+const bcrypt=require('bcryptjs');
+const private_key='b8b96d8661599441631edc161db8d15c'
 
 exports.cambioPassword = async (req,res,next) =>
 {
